@@ -1,5 +1,9 @@
 package com.gama.passagens.repository;
 
-public interface ClienteRepository {
+import org.springframework.data.repository.CrudRepository;
+
+import com.gama.passagens.model.Cliente;
+
+public interface ClienteRepository extends CrudRepository<Cliente, Integer> {
 
 }
