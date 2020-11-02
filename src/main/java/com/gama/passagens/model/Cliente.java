@@ -1,15 +1,20 @@
 package com.gama.passagens.model;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.gama.passagens.model.enums.TipoDocumento;
-
+@Entity
+@Table(name = "tab_cliente")
 public class Cliente {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,7 +27,7 @@ public class Cliente {
 	private String numeroDocumento;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "numero_docto", length = 10)
+	@Column(name = "tipo_docto", length = 10)
 	private TipoDocumento tipoDocumento;
 	
 	@Column(length = 15)
@@ -32,6 +37,85 @@ public class Cliente {
 	private String email;
 	
 	@Embedded
-	private Telefone celular;
+	private Telefone telefone;
+	
+	@Embedded
+	 @AttributeOverrides({
+	    @AttributeOverride(name="ddd",column=@Column(name="emergencia_ddd")),
+	    @AttributeOverride(name="numero",column=@Column(name="emergencia_numero")),
+	    @AttributeOverride(name="nomeContato",column=@Column(name="emergencia_nome_contato"))
+	  })
+	private Telefone telefoneEmergencia;
+	
+	@Embedded
+	private Usuario usuario;
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getNumeroDocumento() {
+		return numeroDocumento;
+	}
+
+	public void setNumeroDocumento(String numeroDocumento) {
+		this.numeroDocumento = numeroDocumento;
+	}
+
+	public TipoDocumento getTipoDocumento() {
+		return tipoDocumento;
+	}
+
+	public void setTipoDocumento(TipoDocumento tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
+	}
+
+	public String getCpfCnpj() {
+		return cpfCnpj;
+	}
+
+	public void setCpfCnpj(String cpfCnpj) {
+		this.cpfCnpj = cpfCnpj;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Telefone getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(Telefone telefone) {
+		this.telefone = telefone;
+	}
+
+	public Telefone getTelefoneEmergencia() {
+		return telefoneEmergencia;
+	}
+
+	public void setTelefoneEmergencia(Telefone telefoneEmergencia) {
+		this.telefoneEmergencia = telefoneEmergencia;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Integer getId() {
+		return id;
+	}
 	
 }

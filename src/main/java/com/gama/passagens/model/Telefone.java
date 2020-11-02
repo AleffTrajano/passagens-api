@@ -9,6 +9,9 @@ public class Telefone {
 	@Column(length = 12)
 	private Long numero;
 	
+	@Column(length = 50)
+	private String nomeContato;
+	
 	public Integer getDdd() {
 		return ddd;
 	}
@@ -20,6 +23,13 @@ public class Telefone {
 	}
 	public void setNumero(Long numero) {
 		this.numero = numero;
+	}
+	
+	public String getNomeContato() {
+		return nomeContato;
+	}
+	public void setNomeContato(String nomeContato) {
+		this.nomeContato = nomeContato;
 	}
 	
 }
