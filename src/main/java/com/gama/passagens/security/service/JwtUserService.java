@@ -20,11 +20,11 @@ public class JwtUserService implements UserDetailsService  {
 	private ClienteRepository repository;
 	
 	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-		Cliente cliente = repository.findByUsuarioLogin(login);
+		Cliente cliente = repository.findByLogin(login);
 		if(cliente == null){
 			throw new UsernameNotFoundException("Usuário não existe");
 		}
-		Usuario user = cliente.getUsuario();
+		Usuario user = cliente;
 		Set<SimpleGrantedAuthority> roles=getAuthority(user);
 		return new org.springframework.security.core.userdetails.User(user.getLogin(), user.getSenha(), roles);
 	}

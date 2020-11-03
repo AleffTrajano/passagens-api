@@ -7,18 +7,13 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.gama.passagens.model.enums.TipoDocumento;
+
 @Entity
 @Table(name = "tab_cliente")
-public class Cliente {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
+public class Cliente extends Usuario {
 	
 	@Column(length = 60)
 	private String nome;
@@ -47,9 +42,6 @@ public class Cliente {
 	  })
 	private Telefone telefoneEmergencia;
 	
-	@Embedded
-	private Usuario usuario;
-
 	public String getNome() {
 		return nome;
 	}
@@ -106,16 +98,6 @@ public class Cliente {
 		this.telefoneEmergencia = telefoneEmergencia;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public Integer getId() {
-		return id;
-	}
 	
 }
