@@ -54,7 +54,8 @@ public class ClienteService {
 		String senhaCriptografada = encoder.encode(usuario.getSenha());
 		usuario.setSenha(senhaCriptografada);
 		
-		repository.save(cliente);
+		if(repository.findByLogin(cliente.getLogin())==null)
+			repository.save(cliente);
 	}
 	
 	
