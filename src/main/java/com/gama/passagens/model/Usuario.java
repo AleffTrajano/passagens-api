@@ -41,7 +41,7 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	@ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL) 
+	@ManyToMany(fetch = FetchType.EAGER) 
 	@JoinTable(name = "tab_user_roles", joinColumns = @JoinColumn(name = "login",nullable=false), inverseJoinColumns = @JoinColumn(name = "role",nullable=false))
 	private Set<Role> roles = new HashSet<>();
 	

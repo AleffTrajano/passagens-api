@@ -17,7 +17,7 @@ public class ClienteController {
 	private ClienteRepository repository;
 	
 	@GetMapping
-	@PreAuthorize(Roles.PRE_ADMIN)
+	@PreAuthorize(Roles.PRE_USER)
 	public Iterable<Cliente> listar() {
 		return repository.findAll();
 	}

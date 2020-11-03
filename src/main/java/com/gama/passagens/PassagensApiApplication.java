@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 
 import com.gama.passagens.model.Cliente;
 import com.gama.passagens.model.Telefone;
-import com.gama.passagens.model.Usuario;
 import com.gama.passagens.model.acesso.Role;
 import com.gama.passagens.repository.RoleRepository;
 import com.gama.passagens.service.ClienteService;
