@@ -3,7 +3,7 @@ package com.gama.passagens.model.acesso;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tb_core_role")
+@Table(name = "tb_role")
 public class Role {
 	@Id
 	@Column(length = 20)

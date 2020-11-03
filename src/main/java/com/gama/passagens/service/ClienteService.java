@@ -40,12 +40,7 @@ public class ClienteService {
 			//}
 		//}
 		
-		Usuario usuario = cliente.getUsuario();
-		
-		if(usuario==null) {
-			//para cadastrar precisa login e senha
-			return;
-		}
+		Usuario usuario = cliente;
 		
 		if(usuario.getLogin()==null)
 			usuario.setLogin(cliente.getEmail());

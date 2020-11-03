@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import com.gama.passagens.model.enums.TipoDocumento;
 @Entity
 @Table(name = "tab_cliente")
-public class Cliente {
+public class Cliente extends Usuario {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
@@ -47,8 +47,6 @@ public class Cliente {
 	  })
 	private Telefone telefoneEmergencia;
 	
-	@Embedded
-	private Usuario usuario;
 
 	public String getNome() {
 		return nome;
@@ -104,14 +102,6 @@ public class Cliente {
 
 	public void setTelefoneEmergencia(Telefone telefoneEmergencia) {
 		this.telefoneEmergencia = telefoneEmergencia;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 	public Integer getId() {
