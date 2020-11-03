@@ -21,6 +21,7 @@ public class ClienteService {
 	public void save(Cliente cliente) {
 		if(cliente.getTelefone()==null) {
 			//faz alguma logica
+			//return;
 		}
 		if(cliente.getTelefone().getNomeContato()==null) {
 			cliente.getTelefone().setNomeContato(cliente.getNome().split(" ")[0]);
@@ -30,6 +31,7 @@ public class ClienteService {
 		
 		if(telEmergencia!=null && telEmergencia.getNomeContato()==null) {
 			//exibe mensagem obrigatoria
+			//return;
 		}
 		
 		//if(cliente.getTelefoneEmergencia()!=null) {
@@ -42,6 +44,7 @@ public class ClienteService {
 		
 		if(usuario==null) {
 			//para cadastrar precisa login e senha
+			return;
 		}
 		
 		if(usuario.getLogin()==null)
@@ -49,6 +52,7 @@ public class ClienteService {
 		
 		if(usuario.getSenha()==null) {
 			//precisa informar
+			//return;
 		}
 			
 		
