@@ -1,13 +1,13 @@
 package com.gama.passagens.model;
 
 public class Login {
-	private String email;
+	private String usuario;
 	private String senha;
-	public String getEmail() {
-		return email;
+	public String getUsuario() {
+		return usuario;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 	public String getSenha() {
 		return senha;

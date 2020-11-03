@@ -1,8 +1,6 @@
-package com.gama.passagens.security;
-import java.util.HashSet;
-import java.util.Set;
+package com.gama.passagens.model.dto;
 
-public class JwtCredencial {
+public class Credencial {
 	private String login;
 	private String token;
     public String getToken() {

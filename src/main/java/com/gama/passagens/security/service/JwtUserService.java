@@ -19,8 +19,8 @@ public class JwtUserService implements UserDetailsService  {
 	@Autowired
 	private ClienteRepository repository;
 	
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Cliente cliente = repository.findByEmail(email);
+	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+		Cliente cliente = repository.findByUsuarioLogin(login);
 		if(cliente == null){
 			throw new UsernameNotFoundException("Usuário não existe");
 		}

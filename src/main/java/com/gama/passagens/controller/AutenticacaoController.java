@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gama.passagens.model.Cliente;
 import com.gama.passagens.model.Login;
+import com.gama.passagens.model.dto.Credencial;
 import com.gama.passagens.security.JwtTokenProvider;
 import com.gama.passagens.service.ClienteService;
 
@@ -40,27 +41,19 @@ public class AutenticacaoController {
 		
 		final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                		login.getEmail(),
+                		login.getUsuario(),
                 		login.getSenha()
                 )
         );
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		final String token = jwtTokenUtil.generateToken(authentication);
-        //JwtCredencial credencial= new JwtCredencial();
-        
-		
-		return ResponseEntity.ok(token);
-		
-		/*
-		credencial.setLogin(login.getUsername());
+        Credencial credencial= new Credencial();
+        credencial.setLogin(login.getUsuario());
         credencial.setToken(token);
-        authentication.getAuthorities().forEach(a -> {
-        	if(a.getAuthority().endsWith("MENU"))
-        		credencial.getMenus().add(a.getAuthority());
-		});
-       
-        */
+        
+		return ResponseEntity.ok(credencial);
+		
         
 	}
 }
