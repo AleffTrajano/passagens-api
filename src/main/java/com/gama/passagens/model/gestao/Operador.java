@@ -1,8 +1,10 @@
-package com.gama.passagens.model;
+package com.gama.passagens.model.gestao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import com.gama.passagens.model.acesso.Usuario;
 
 @Entity
 @Table(name = "tab_operador")

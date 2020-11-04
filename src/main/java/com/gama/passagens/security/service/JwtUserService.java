@@ -10,8 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.gama.passagens.model.Cliente;
-import com.gama.passagens.model.Usuario;
+import com.gama.passagens.model.acesso.Usuario;
+import com.gama.passagens.model.cliente.Cliente;
 import com.gama.passagens.repository.ClienteRepository;
 
 @Service(value = "jwtUserService")

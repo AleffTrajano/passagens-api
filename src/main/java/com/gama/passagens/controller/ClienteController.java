@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gama.passagens.model.Cliente;
+import com.gama.passagens.model.cliente.Cliente;
 import com.gama.passagens.model.enums.Roles;
 import com.gama.passagens.repository.ClienteRepository;
 

@@ -1,4 +1,4 @@
-package com.gama.passagens.model;
+package com.gama.passagens.model.dto;
 
 public class Login {
 	private String usuario;

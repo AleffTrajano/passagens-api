@@ -1,26 +1,30 @@
-package com.gama.passagens.model;
+package com.gama.passagens.model.acesso;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.MappedSuperclass;
-
-import com.gama.passagens.model.acesso.Role;
+import javax.persistence.Table;
 
 //@Embeddable
 //https://thorben-janssen.com/complete-guide-inheritance-strategies-jpa-hibernate/
 //@Embeddable
+//@MappedSuperclass
 
-@MappedSuperclass
-public class Usuario {
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "tab_usuario")
+public abstract class Usuario {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;

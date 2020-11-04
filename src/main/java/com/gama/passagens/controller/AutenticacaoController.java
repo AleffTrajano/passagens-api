@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gama.passagens.model.Cliente;
-import com.gama.passagens.model.Login;
+import com.gama.passagens.model.cliente.Cliente;
 import com.gama.passagens.model.dto.Credencial;
+import com.gama.passagens.model.dto.Login;
 import com.gama.passagens.security.JwtTokenProvider;
 import com.gama.passagens.service.ClienteService;
 

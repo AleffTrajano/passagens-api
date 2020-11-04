@@ -1,4 +1,4 @@
-package com.gama.passagens.model;
+package com.gama.passagens.model.cliente;
 
 import javax.persistence.Column;
 

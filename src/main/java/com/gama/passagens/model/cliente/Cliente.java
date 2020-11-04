@@ -1,4 +1,4 @@
-package com.gama.passagens.model;
+package com.gama.passagens.model.cliente;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -9,6 +9,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
+import com.gama.passagens.model.acesso.Usuario;
 import com.gama.passagens.model.enums.TipoDocumento;
 
 @Entity
