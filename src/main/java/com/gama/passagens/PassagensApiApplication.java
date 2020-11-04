@@ -10,8 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
-import com.gama.passagens.client.amadeus.TicketClient;
-import com.gama.passagens.client.amadeus.model.FlightOffersPrice;
+import com.gama.passagens.clientapi.amadeus.TicketClient;
+import com.gama.passagens.clientapi.amadeus.model.FlightOffersPrice;
 
 @SpringBootApplication
 @EnableFeignClients
