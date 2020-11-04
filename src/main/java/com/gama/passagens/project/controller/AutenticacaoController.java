@@ -15,7 +15,7 @@ import com.gama.passagens.infra.security.JwtTokenProvider;
 import com.gama.passagens.project.model.cliente.Cliente;
 import com.gama.passagens.project.model.dto.Credencial;
 import com.gama.passagens.project.model.dto.Login;
-import com.gama.passagens.project.service.ClienteService;
+import com.gama.passagens.project.service.CadastroService;
 
 @RestController
 @RequestMapping("/")
@@ -28,7 +28,7 @@ public class AutenticacaoController {
 	private JwtTokenProvider jwtTokenUtil;
 	
 	@Autowired
-	private ClienteService service;
+	private CadastroService service;
 	
 	@PostMapping("/signin")
 	public void signin(@RequestBody Cliente cliente) {

@@ -13,20 +13,20 @@ import org.springframework.stereotype.Service;
 import com.gama.passagens.project.model.acesso.Usuario;
 import com.gama.passagens.project.model.cliente.Cliente;
 import com.gama.passagens.project.repository.ClienteRepository;
+import com.gama.passagens.project.repository.UsuarioRepostiry;
 
 @Service(value = "jwtUserService")
 public class JwtUserService implements UserDetailsService  {
 	@Autowired
-	private ClienteRepository repository;
+	private UsuarioRepostiry repository;
 	
 	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-		Cliente cliente = repository.findByLogin(login);
-		if(cliente == null){
+		Usuario usuario = repository.findByLogin(login);
+		if(usuario == null){
 			throw new UsernameNotFoundException("Usuário não existe");
 		}
-		Usuario user = cliente;
-		Set<SimpleGrantedAuthority> roles=getAuthority(user);
-		return new org.springframework.security.core.userdetails.User(user.getLogin(), user.getSenha(), roles);
+		Set<SimpleGrantedAuthority> roles=getAuthority(usuario);
+		return new org.springframework.security.core.userdetails.User(usuario.getLogin(), usuario.getSenha(), roles);
 	}
 	private Set<SimpleGrantedAuthority> getAuthority(Usuario user){
 		Set<SimpleGrantedAuthority> authorities = new HashSet<>();
