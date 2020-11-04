@@ -36,7 +36,7 @@ public class SwaggerConfig {
 		docket
 		.globalOperationParameters(params)
 		.select()
-		.apis(RequestHandlerSelectors.basePackage("com.gama.passagens.controller"))
+		.apis(RequestHandlerSelectors.basePackage("com.gama.passagens.project.controller"))
 		.paths(PathSelectors.any())
 		.build()
 		.apiInfo(this.informacoesApi().build())

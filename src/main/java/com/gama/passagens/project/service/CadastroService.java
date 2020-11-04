@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.gama.passagens.infra.exceptions.BusinessException;
 import com.gama.passagens.infra.exceptions.ConflictException;
+import com.gama.passagens.project.model.acesso.Role;
 import com.gama.passagens.project.model.acesso.Usuario;
 import com.gama.passagens.project.model.cliente.Cliente;
 import com.gama.passagens.project.model.cliente.Telefone;
@@ -42,11 +44,11 @@ public class CadastroService {
 	}
 	public void save(Cliente cliente) {
 		if(repository.existsByCpfCnpj(cliente.getCpfCnpj()))
-			throw new ConflictException("CPF já registrado: " + cliente.getCpfCnpj());
+			throw new BusinessException("CPF já registrado: " + cliente.getCpfCnpj());
 		
 		
 		if(cliente.getTelefone()==null) {
-			throw new ConflictException("É necessário informar o telefone no cadastro do cliente");
+			throw new BusinessException("É necessário informar o telefone no cadastro do cliente");
 		}
 		if(cliente.getTelefone().getNomeContato()==null) {
 			cliente.getTelefone().setNomeContato(cliente.getNome().split(" ")[0]);
@@ -58,6 +60,9 @@ public class CadastroService {
 			//exibe mensagem obrigatoria
 			//return;
 		}
+		
+		cliente.setRoles(null);
+		cliente.addRole(new Role("USER"));
 		
 		//if(cliente.getTelefoneEmergencia()!=null) {
 			//if(cliente.getTelefoneEmergencia().getNomeContato()==null) {

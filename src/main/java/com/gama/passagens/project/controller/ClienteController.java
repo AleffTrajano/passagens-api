@@ -11,12 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gama.passagens.project.model.cliente.Cliente;
 import com.gama.passagens.project.model.enums.Roles;
 import com.gama.passagens.project.repository.ClienteRepository;
+import com.gama.passagens.project.service.CadastroService;
 
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
 	@Autowired
 	private ClienteRepository repository;
+	
+	@Autowired
+	private CadastroService service;
+	
 	
 	@GetMapping
 	@PreAuthorize(Roles.PRE_ADMIN)
@@ -25,7 +30,7 @@ public class ClienteController {
 	}
 	@PostMapping
 	public void save(@RequestBody Cliente cliente) {
-		repository.save(cliente);
+		service.save(cliente);
 	}
 
 }
