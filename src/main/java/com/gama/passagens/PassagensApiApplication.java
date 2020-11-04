@@ -1,20 +1,17 @@
 package com.gama.passagens;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
-import com.gama.passagens.client.ViaCepClient;
-import com.gama.passagens.client.model.Endereco;
-import com.gama.passagens.model.acesso.Role;
-import com.gama.passagens.model.cliente.Cliente;
-import com.gama.passagens.model.cliente.Telefone;
-import com.gama.passagens.model.gestao.Operador;
-import com.gama.passagens.repository.OperadorRepository;
-import com.gama.passagens.repository.RoleRepository;
-import com.gama.passagens.service.ClienteService;
+import com.gama.passagens.client.amadeus.TicketClient;
+import com.gama.passagens.client.amadeus.model.FlightOffersPrice;
 
 @SpringBootApplication
 @EnableFeignClients
@@ -25,47 +22,18 @@ public class PassagensApiApplication {
 	}
 	
 	@Bean
-    public CommandLineRunner run(ClienteService s,RoleRepository r, OperadorRepository or, ViaCepClient cep	 ) {
+    public CommandLineRunner run(TicketClient tc) {
         return args -> {
-        	
-        	Endereco buscarEndereco = cep.buscarEndereco("51290605");
-        	
-        	Role rUser = new Role("USER");
-        	Role rAdmin = new Role("ADMIN");
-        	
-        	r.save(rUser);
-        	r.save(rAdmin);
-        	
-        	Cliente cli = new Cliente();
-        	cli.setNome("GLEYSON");
-        	cli.setEmail("gleysondev@gmail.com");
-        	cli.setLogin("user");
-        	cli.setSenha("user");
-        	
-        	Telefone t = new Telefone();
-        	t.setDdd(11);
-        	t.setNumero(654654L);
-        	
-        	cli.setTelefone(t);
-        	
-        	cli.addRole(rUser);
-        	
-        	s.save(cli);
+        	Map<String,String> params = new HashMap<String, String>();
+        	params.put("originCode", "NYC");
+        	params.put("destinationCode", "PAR");
+        	params.put("departureDate", "2020-11-16");
+        	params.put("returnDate", "2020-11-28");
+        	params.put("adults", "1");
         	
         	
-        	Operador ope = new Operador();
-        	ope.setNome("GESTOR");
-        	ope.setLogin("admin");
-        	ope.setSenha("admin");
-        	
-        	
-        	ope.addRole(rAdmin);
-        	ope.addRole(rUser);
-        	
-        	if(or.findByLogin(ope.getLogin())==null)
-        		or.save(ope);
-        	
-        	System.out.println("SALVOU");
+        	List<FlightOffersPrice> resposta = tc.tickets(params);
+        	System.out.println(resposta);
         };
     }
 }
