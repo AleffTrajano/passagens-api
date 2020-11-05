@@ -1,21 +1,37 @@
 package com.gama.passagens.infra.exceptions;
 
+import com.gama.passagens.infra.exceptions.config.ErrorType;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+public  class BusinessException extends RuntimeException {
+	private String tipo;
+	private String codigo;
+	private String mensagem;
+	
+	public BusinessException(ErrorType error, Object... args) {
+		super(String.format(error.getMensagem(), args));
+		this.tipo=error.getTipo();
+		this.codigo=error.getCodigo();
+		this.mensagem=String.format(error.getMensagem(), args);
+	}
 
-@ResponseStatus(HttpStatus.CONFLICT)
-public class BusinessException extends RuntimeException {
-
-	private static final long serialVersionUID = 1L;
-
-	public BusinessException(String message) {
-		super(message);
+	public BusinessException(String mensagem) {
+		super(mensagem);
+		 ErrorType erroGenerico = ErrorType.ERRO_GENERICO;
+		this.tipo=erroGenerico.getTipo();
+		this.codigo=erroGenerico.getCodigo();
+		this.mensagem=mensagem;
 	}
 	
-	public BusinessException(String message, Throwable cause) {
-		super(message, cause);
+	public static BusinessException erroGenerico() {
+		return new BusinessException(ErrorType.ERRO_GENERICO);
 	}
-	
+	public String getTipo() {
+		return tipo;
+	}
+	public String getCodigo() {
+		return codigo;
+	}
+	public String getMensagem() {
+		return mensagem;
+	}
 }
-
