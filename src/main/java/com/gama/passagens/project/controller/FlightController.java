@@ -8,22 +8,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gama.passagens.amadeus.flight.FlightSearch;
+import com.gama.passagens.amadeus.flight.FlightSearchService;
 import com.gama.passagens.amadeus.order.FlightOrderService;
-import com.gama.passagens.project.service.VooService;
 
 @RestController
-@RequestMapping("/voos")
-public class VooController {
+@RequestMapping("/flights")
+public class FlightController {
+	//@Autowired
+	//private FlightsService service;
+	
 	@Autowired
-	private VooService service;
+	private FlightSearchService flightSearchService;
 	
 	@Autowired
 	private FlightOrderService orderService;
 	
 	@PostMapping("")
-	public Object voos(@RequestBody Map<String,String> params) {
+	public FlightSearch flights(@RequestBody Map<String,String> params) {
 		try {
-			return service.consultaVoos(params);
+			return flightSearchService.flights(params);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

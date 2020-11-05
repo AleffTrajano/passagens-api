@@ -10,10 +10,10 @@ import com.amadeus.Params;
 import com.amadeus.resources.FlightOfferSearch;
 
 @Service
-public class VooService {
+public class FlightsService {
 	@Autowired
 	private Amadeus amadeus;
-	public Object consultaVoos(Map<String,String> params) throws Exception{
+	public Object flights(Map<String,String> params) throws Exception{
 		Params p = null;
 		for(Map.Entry<String, String> entry : params.entrySet()) {
 		    String key = entry.getKey();
@@ -25,7 +25,5 @@ public class VooService {
 		}
 		FlightOfferSearch[] flightOffersSearches = amadeus.shopping.flightOffersSearch.get(p);
 		return flightOffersSearches[0].getResponse().getBody();
-		//return Arrays.asList(flightOffersSearches);
 	}
-	
 }
