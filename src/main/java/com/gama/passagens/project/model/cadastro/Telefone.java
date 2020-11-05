@@ -1,4 +1,4 @@
-package com.gama.passagens.project.model.cliente;
+package com.gama.passagens.project.model.cadastro;
 
 import javax.persistence.Column;
 

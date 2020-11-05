@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gama.passagens.infra.security.JwtTokenProvider;
-import com.gama.passagens.project.model.cliente.Cliente;
+import com.gama.passagens.project.model.cadastro.Viajante;
 import com.gama.passagens.project.model.dto.Credencial;
 import com.gama.passagens.project.model.dto.Login;
 import com.gama.passagens.project.service.CadastroService;
@@ -31,7 +31,7 @@ public class AutenticacaoController {
 	private CadastroService service;
 	
 	@PostMapping("/signin")
-	public void signin(@RequestBody Cliente cliente) {
+	public void signin(@RequestBody Viajante cliente) {
 		service.save(cliente);
 	}
 	    

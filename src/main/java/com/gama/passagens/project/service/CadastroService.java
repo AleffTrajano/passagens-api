@@ -8,17 +8,17 @@ import com.gama.passagens.infra.exceptions.BusinessException;
 import com.gama.passagens.infra.exceptions.ConflictException;
 import com.gama.passagens.project.model.acesso.Role;
 import com.gama.passagens.project.model.acesso.Usuario;
-import com.gama.passagens.project.model.cliente.Cliente;
-import com.gama.passagens.project.model.cliente.Telefone;
+import com.gama.passagens.project.model.cadastro.Viajante;
+import com.gama.passagens.project.model.cadastro.Telefone;
 import com.gama.passagens.project.model.gestao.Operador;
-import com.gama.passagens.project.repository.ClienteRepository;
+import com.gama.passagens.project.repository.ViajanteRepository;
 import com.gama.passagens.project.repository.UsuarioRepostiry;
 
 @Service
 public class CadastroService {
 	
 	@Autowired
-	private ClienteRepository repository;
+	private ViajanteRepository repository;
 	
 	@Autowired
 	private UsuarioRepostiry userRepository;
@@ -27,12 +27,6 @@ public class CadastroService {
 	private PasswordEncoder encoder;
 	private void saveUsuario(Usuario usuario) {
 	
-		if(usuario.getSenha()==null) {
-			//precisa informar
-			//return;
-		}
-			
-		
 		String senhaCriptografada = encoder.encode(usuario.getSenha());
 		usuario.setSenha(senhaCriptografada);
 		
@@ -42,34 +36,9 @@ public class CadastroService {
 	public void save(Operador operador) {
 		saveUsuario(operador);
 	}
-	public void save(Cliente cliente) {
-		if(repository.existsByCpfCnpj(cliente.getCpfCnpj()))
-			throw new BusinessException("CPF já registrado: " + cliente.getCpfCnpj());
-		
-		
-		if(cliente.getTelefone()==null) {
-			throw new BusinessException("É necessário informar o telefone no cadastro do cliente");
-		}
-		if(cliente.getTelefone().getNomeContato()==null) {
-			cliente.getTelefone().setNomeContato(cliente.getNome().split(" ")[0]);
-		}
-		
-		Telefone telEmergencia=cliente.getTelefoneEmergencia();
-		
-		if(telEmergencia!=null && telEmergencia.getNomeContato()==null) {
-			//exibe mensagem obrigatoria
-			//return;
-		}
-		
-		cliente.setRoles(null);
-		cliente.addRole(new Role("USER"));
-		
-		//if(cliente.getTelefoneEmergencia()!=null) {
-			//if(cliente.getTelefoneEmergencia().getNomeContato()==null) {
-				//precisa do nome
-			//}
-		//}
-		
+	public void save(Viajante cliente) {
+		if(!repository.existsByEmail(cliente.getEmail()))
+			saveUsuario(cliente);
 		
 	}
 	
