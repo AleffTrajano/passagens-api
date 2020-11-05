@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.amadeus.Amadeus;
+import com.amadeus.exceptions.ResponseException;
 import com.amadeus.resources.FlightOrder;
 import com.amadeus.resources.FlightPrice;
 import com.amadeus.resources.Traveler;
 import com.amadeus.resources.Traveler.Phone;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 
 @Service
@@ -36,7 +38,24 @@ public class FlightOrderService {
 		FlightOrderRequest req = gson.fromJson(jsonElement, FlightOrderRequest.class);
 		return req;
 	}
-	
+	public String order(String json) throws RuntimeException {
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String response = null;
+		FlightOrder order = null;
+		try {
+			order = amadeus.booking.flightOrders.post(json);
+			if (order == null)
+				throw new RuntimeException("A passagem solicitada não existe.");
+			
+			if (order.getResponse().getStatusCode() != 200 && order.getResponse().getStatusCode() != 201)
+				throw new RuntimeException("" + order.getResponse().getStatusCode());
+
+		} catch (ResponseException e) {
+			throw new RuntimeException(e.getMessage().replaceAll("\n", " - "));
+		}
+		response = gson.toJson(order.getResponse().getResult());
+		return response;
+	}
 	public void order(Map orderRequest) throws Exception {
 		
 		FlightOrderRequest request = converter(orderRequest);

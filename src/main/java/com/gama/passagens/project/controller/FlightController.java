@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.amadeus.resources.FlightOrder;
 import com.gama.passagens.amadeus.flight.FlightSearch;
 import com.gama.passagens.amadeus.flight.FlightSearchService;
 import com.gama.passagens.amadeus.order.FlightOrderService;
@@ -15,8 +16,6 @@ import com.gama.passagens.amadeus.order.FlightOrderService;
 @RestController
 @RequestMapping("/flights")
 public class FlightController {
-	//@Autowired
-	//private FlightsService service;
 	
 	@Autowired
 	private FlightSearchService flightSearchService;
@@ -35,13 +34,7 @@ public class FlightController {
     	
 	}
 	@PostMapping("/order")
-	public void order(@RequestBody Map order) {
-		try {
-			orderService.order(order);
-		} catch (Exception e) {
-			e.printStackTrace();
-			
-		}
-    	
+	public String order(@RequestBody String order) {
+		return orderService.order(order);
 	}
 }

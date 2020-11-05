@@ -1,7 +1,11 @@
 package com.gama.passagens.project.model.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class Login {
+	@ApiModelProperty(value = "Nome do usuario", required = true, example = "user")
 	private String usuario;
+	@ApiModelProperty(value = "Senha do usuario", required = true, example = "user@123")
 	private String senha;
 	public String getUsuario() {
 		return usuario;
