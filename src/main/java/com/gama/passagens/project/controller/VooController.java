@@ -30,7 +30,7 @@ public class VooController {
 	
 	@GetMapping("/emailduplicado")
 	public void erroEmail() {
-		throw new EmailExistenteException("emailduplicado@dominio.com.br");
+		throw new EmailExistenteException("Email duplicado: " + "emailduplicado@dominio.com.br");
 	}
 	
 	@PostMapping("")
