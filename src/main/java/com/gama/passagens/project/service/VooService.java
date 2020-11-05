@@ -1,6 +1,5 @@
 package com.gama.passagens.project.service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -9,12 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.amadeus.Amadeus;
 import com.amadeus.Params;
-import com.amadeus.exceptions.ResponseException;
 import com.amadeus.resources.FlightOfferSearch;
 import com.amadeus.resources.FlightOrder;
 import com.amadeus.resources.FlightPrice;
 import com.amadeus.resources.Traveler;
 import com.gama.passagens.project.model.dto.AmadeuOrder;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 @Service
@@ -37,7 +38,27 @@ public class VooService {
 	}
 	public void gerarPedido(AmadeuOrder orderObjetct) throws Exception{
 		
-		FlightPrice flightPricing = amadeus.shopping.flightOffersSearch.pricing.post((JsonObject) orderObjetct.getData().getFlightOffers());
+		/*
+		 * JsonArray flighOffers = new
+		 * Gson().toJsonTree(orderObjetct.getData().getFlightOffers()).getAsJsonArray();
+		 * JsonObject offers = new JsonObject(); offers.add("flight-offer",
+		 * flighOffers);
+		 * 
+		 */
+		
+		List<Object> l = (List<Object>) orderObjetct.getData().getFlightOffers();
+		
+		JsonArray flighOffers = new Gson().toJsonTree(l).getAsJsonArray();
+		JsonObject offers = new JsonObject(); 
+		offers.add("flightOffers",
+		flighOffers);
+				 
+		//Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		//String jsons = gson.toJson(orderObjetct.getData().getFlightOffers());
+		
+		//FlightOfferSearch s= gson.toJson(jsons, FlightOfferSearch.class) ;
+		
+		FlightPrice flightPricing = amadeus.shopping.flightOffersSearch.pricing.post(offers);
 
 	    // We book the flight previously priced
 	    FlightOrder order = amadeus.booking.flightOrders.post(flightPricing, (Traveler[]) orderObjetct.getData().getTravelers());
