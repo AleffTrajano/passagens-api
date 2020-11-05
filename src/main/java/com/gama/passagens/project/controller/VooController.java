@@ -35,13 +35,7 @@ public class VooController {
 	
 	@PostMapping("")
 	public Object voos(@RequestBody Map<String,String> params) {
-		try {
-			return service.consultaVoos(params);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-    	
+		return service.consultaVoos(params);
 	}
 	@PostMapping("/order")
 	public void order(@RequestBody Map order) {
