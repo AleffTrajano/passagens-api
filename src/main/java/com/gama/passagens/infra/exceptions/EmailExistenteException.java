@@ -1,10 +1,8 @@
 package com.gama.passagens.infra.exceptions;
 
-import com.gama.passagens.infra.exceptions.config.ErrorType;
-
 public class EmailExistenteException extends BusinessException {
+	public EmailExistenteException(String mensagem) {
+		super(ERROR_ID,"001",mensagem);
+	}
 
-	public EmailExistenteException(String email) {
-		super(ErrorType.EMAIL_EXISTENTE, email);
-	}	
 }

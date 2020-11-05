@@ -1,29 +1,18 @@
 package com.gama.passagens.infra.exceptions;
 
-import com.gama.passagens.infra.exceptions.config.ErrorType;
-
 public  class BusinessException extends RuntimeException {
+	public static String ERROR_ID = "400";
 	private String tipo;
 	private String codigo;
 	private String mensagem;
-	
-	public BusinessException(ErrorType error, Object... args) {
-		super(String.format(error.getMensagem(), args));
-		this.tipo=error.getTipo();
-		this.codigo=error.getCodigo();
-		this.mensagem=String.format(error.getMensagem(), args);
-	}
-
-	public BusinessException(String mensagem) {
+	public BusinessException(String tipo, String codigo, String mensagem) {
 		super(mensagem);
-		 ErrorType erroGenerico = ErrorType.ERRO_GENERICO;
-		this.tipo=erroGenerico.getTipo();
-		this.codigo=erroGenerico.getCodigo();
-		this.mensagem=mensagem;
+		this.tipo = tipo;
+		this.codigo = codigo;
+		this.mensagem = mensagem;
 	}
-	
-	public static BusinessException erroGenerico() {
-		return new BusinessException(ErrorType.ERRO_GENERICO);
+	public BusinessException(String mensagem) {
+		this("400","999",mensagem);
 	}
 	public String getTipo() {
 		return tipo;
