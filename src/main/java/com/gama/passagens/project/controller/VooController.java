@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gama.passagens.project.model.dto.AmadeuOrder;
+import com.gama.passagens.amadeus.order.FlightOrderService;
 import com.gama.passagens.project.service.VooService;
 
 @RestController
@@ -16,6 +16,9 @@ import com.gama.passagens.project.service.VooService;
 public class VooController {
 	@Autowired
 	private VooService service;
+	
+	@Autowired
+	private FlightOrderService orderService;
 	
 	@PostMapping("")
 	public Object voos(@RequestBody Map<String,String> params) {
@@ -28,9 +31,9 @@ public class VooController {
     	
 	}
 	@PostMapping("/order")
-	public void order(@RequestBody AmadeuOrder order) {
+	public void order(@RequestBody Map order) {
 		try {
-			service.gerarPedido(order);
+			orderService.order(order);
 		} catch (Exception e) {
 			e.printStackTrace();
 			

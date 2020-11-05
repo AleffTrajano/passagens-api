@@ -5,8 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.gama.passagens.amadeus.AmadeusStart;
-
 @SpringBootApplication
 //@EnableFeignClients
 public class PassagensApiApplication {
