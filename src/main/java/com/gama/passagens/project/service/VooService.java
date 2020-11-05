@@ -41,24 +41,22 @@ public class VooService {
 		/*
 		 * JsonArray flighOffers = new
 		 * Gson().toJsonTree(orderObjetct.getData().getFlightOffers()).getAsJsonArray();
-		 * JsonObject offers = new JsonObject(); offers.add("flight-offer",
+		 * JsonObject offers = new JsonObject(); 
+		 * offers.add("flight-offer",
 		 * flighOffers);
 		 * 
 		 */
 		
 		List<Object> l = (List<Object>) orderObjetct.getData().getFlightOffers();
 		
-		JsonArray flighOffers = new Gson().toJsonTree(l).getAsJsonArray();
-		JsonObject offers = new JsonObject(); 
-		offers.add("flightOffers",
-		flighOffers);
+		JsonArray flighOffers = new Gson().toJsonTree(orderObjetct.getData().getFlightOffers()).getAsJsonArray();
 				 
 		//Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		//String jsons = gson.toJson(orderObjetct.getData().getFlightOffers());
 		
 		//FlightOfferSearch s= gson.toJson(jsons, FlightOfferSearch.class) ;
 		
-		FlightPrice flightPricing = amadeus.shopping.flightOffersSearch.pricing.post(offers);
+		FlightPrice flightPricing = amadeus.shopping.flightOffersSearch.pricing.post((JsonObject) flighOffers.get(0));
 
 	    // We book the flight previously priced
 	    FlightOrder order = amadeus.booking.flightOrders.post(flightPricing, (Traveler[]) orderObjetct.getData().getTravelers());
