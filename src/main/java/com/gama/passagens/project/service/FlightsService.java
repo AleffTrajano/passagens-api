@@ -24,6 +24,6 @@ public class FlightsService {
 		    	p.and(key, value);
 		}
 		FlightOfferSearch[] flightOffersSearches = amadeus.shopping.flightOffersSearch.get(p);
-		return flightOffersSearches[0].getResponse().getBody();
+		return flightOffersSearches;
 	}
 }

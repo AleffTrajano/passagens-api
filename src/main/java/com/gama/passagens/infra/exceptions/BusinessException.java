@@ -1,21 +1,26 @@
 package com.gama.passagens.infra.exceptions;
 
-
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-@ResponseStatus(HttpStatus.CONFLICT)
-public class BusinessException extends RuntimeException {
-
-	private static final long serialVersionUID = 1L;
-
-	public BusinessException(String message) {
-		super(message);
+public  class BusinessException extends RuntimeException {
+	public static String ERROR_ID = "400";
+	private String tipo;
+	private String codigo;
+	private String mensagem;
+	public BusinessException(String tipo, String codigo, String mensagem) {
+		super(mensagem);
+		this.tipo = tipo;
+		this.codigo = codigo;
+		this.mensagem = mensagem;
 	}
-	
-	public BusinessException(String message, Throwable cause) {
-		super(message, cause);
+	public BusinessException(String mensagem) {
+		this("400","999",mensagem);
 	}
-	
+	public String getTipo() {
+		return tipo;
+	}
+	public String getCodigo() {
+		return codigo;
+	}
+	public String getMensagem() {
+		return mensagem;
+	}
 }
-
