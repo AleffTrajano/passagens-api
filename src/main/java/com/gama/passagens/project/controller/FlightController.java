@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gama.passagens.amadeus.flight.FlightSearch;
 import com.gama.passagens.amadeus.flight.FlightSearchService;
 import com.gama.passagens.amadeus.order.FlightOrderService;
+import com.gama.passagens.project.service.OrderService;
 
 @RestController
 @RequestMapping("/flights")
@@ -23,7 +24,8 @@ public class FlightController {
 	private FlightSearchService flightSearchService;
 	
 	@Autowired
-	private FlightOrderService orderService;
+	private OrderService service;
+	
 	
 	@PostMapping("")
 	public FlightSearch flights(@RequestBody Map<String,String> params) {
@@ -35,12 +37,14 @@ public class FlightController {
 		}
     	
 	}
-	@PostMapping("/order")
-	public String postOrder(@RequestBody String order) {
-		return orderService.postOrder(order);
+	@PostMapping("/order/{viajante}")
+	public String postOrder(@PathVariable("viajante") Integer viajante, @RequestBody String order) {
+		return service.createOrder(viajante,order);
 	}
+	/*
 	@GetMapping("/order/get")
 	public String getOrder(@RequestParam("id") String id ) {
 		return orderService.getOrder(id);
 	}
+	*/
 }

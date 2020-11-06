@@ -1,5 +1,6 @@
 package com.gama.passagens.amadeus.order;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +17,8 @@ import com.google.gson.JsonElement;
 public class FlightOrderService {
 	@Autowired
 	private Amadeus amadeus;
-	//se quiser ler de arquivo
-	/*
-	public static void gerarOrder() throws Exception {
-		String content = new String(Files.readAllBytes(Paths.get("/dev/json.json")));
-		FlightOrderRequest root = converter(content);
-		order(root);
-	}
-	*/
+	
+	
 	private FlightOrderRequest converter(String json) throws Exception {
 		Gson gson = new Gson();
 		FlightOrderRequest root = gson.fromJson(json, FlightOrderRequest.class);
@@ -35,7 +30,8 @@ public class FlightOrderService {
 		FlightOrderRequest req = gson.fromJson(jsonElement, FlightOrderRequest.class);
 		return req;
 	}
-	public String postOrder(String json) throws RuntimeException {
+	public Order postOrder(String json) throws RuntimeException {
+		Order myOrder = new Order();
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String response = null;
 		FlightOrder order = null;
@@ -46,12 +42,15 @@ public class FlightOrderService {
 			
 			if (order.getResponse().getStatusCode() != 200 && order.getResponse().getStatusCode() != 201)
 				throw new RuntimeException("" + order.getResponse().getStatusCode());
-
+			
+			response = gson.toJson(order.getResponse().getResult());
+			myOrder.setJson(response);
+			myOrder.setId(order.getId());
+			myOrder.setPrice(new BigDecimal("100"));
 		} catch (ResponseException e) {
 			throw new RuntimeException(e.getMessage().replaceAll("\n", " - "));
 		}
-		response = gson.toJson(order.getResponse().getResult());
-		return response;
+		return myOrder;
 	}
 	public String getOrder(String id) throws RuntimeException {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -69,6 +68,8 @@ public class FlightOrderService {
 				throw new RuntimeException("" + order.getResponse().getStatusCode());
 			
 			response = gson.toJson(order.getResponse().getResult());
+			
+			
 		} catch (ResponseException e) {
 			throw new RuntimeException(e.getMessage().replaceAll("\n", " - "));
 		}
