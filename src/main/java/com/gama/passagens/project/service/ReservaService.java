@@ -1,5 +1,8 @@
 package com.gama.passagens.project.service;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +12,7 @@ import com.gama.passagens.project.model.reserva.Reserva;
 import com.gama.passagens.project.repository.ReservaRepository;
 
 @Component
-public class OrderService {
+public class ReservaService {
 	@Autowired
 	private FlightOrderService orderService;
 	
@@ -26,8 +29,12 @@ public class OrderService {
 			r.setViajanteId(viajanteId);
 			repository.save(r);
 		}
-		
-		
 		return postOrder.getJson();
+	}
+	
+	public List<Reserva> listarReservas(Integer viajanteId, LocalDateTime inicio, LocalDateTime fim) {
+		
+		List<Reserva> findByDataHoraBetween = repository.findByViajanteIdAndDataHoraBetween(viajanteId, inicio, fim);
+		return findByDataHoraBetween;
 	}
 }

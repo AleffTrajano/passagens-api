@@ -27,7 +27,7 @@ public class Reserva {
 	private Integer viajanteId;
 	
 	@Column(name = "dh_reserva")
-	private LocalDateTime dataHoraReserva = LocalDateTime.now();
+	private LocalDateTime dataHora = LocalDateTime.now();
 	
 	@Enumerated(EnumType.STRING)
 	private ReservaStatus status = ReservaStatus.PP;
@@ -50,11 +50,11 @@ public class Reserva {
 	public void setViajanteId(Integer viajanteId) {
 		this.viajanteId = viajanteId;
 	}
-	public LocalDateTime getDataHoraReserva() {
-		return dataHoraReserva;
+	public LocalDateTime getDataHora() {
+		return dataHora;
 	}
-	public void setDataHoraReserva(LocalDateTime dataHoraReserva) {
-		this.dataHoraReserva = dataHoraReserva;
+	public void setDataHora(LocalDateTime dataHora) {
+		this.dataHora = dataHora;
 	}
 	public ReservaStatus getStatus() {
 		return status;

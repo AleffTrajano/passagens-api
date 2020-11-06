@@ -3,6 +3,13 @@ package com.gama.passagens.project.model.dto;
 public class Credencial {
 	private String login;
 	private String token;
+	private Integer userId;
+	public Integer getUserId() {
+		return userId;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
     public String getToken() {
         return token;
     }

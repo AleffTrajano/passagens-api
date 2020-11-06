@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gama.passagens.infra.security.JwtTokenProvider;
+import com.gama.passagens.project.model.acesso.Usuario;
 import com.gama.passagens.project.model.cadastro.Viajante;
 import com.gama.passagens.project.model.dto.Credencial;
 import com.gama.passagens.project.model.dto.Login;
+import com.gama.passagens.project.repository.UsuarioRepostiry;
 import com.gama.passagens.project.service.CadastroService;
 
 @RestController
@@ -30,6 +32,9 @@ public class AutenticacaoController {
 	@Autowired
 	private CadastroService service;
 	
+	@Autowired
+	private UsuarioRepostiry userRepository;
+	
 	@PostMapping("/signin")
 	public void signin(@RequestBody Viajante cliente) {
 		service.save(cliente);
@@ -38,6 +43,8 @@ public class AutenticacaoController {
 	
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody Login login) {
+		
+		Usuario user = userRepository.findByLogin(login.getUsuario());
 		
 		final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -51,7 +58,8 @@ public class AutenticacaoController {
         Credencial credencial= new Credencial();
         credencial.setLogin(login.getUsuario());
         credencial.setToken(token);
-        
+        credencial.setUserId(user.getId());;
+      
 		return ResponseEntity.ok(credencial);
 		
         
