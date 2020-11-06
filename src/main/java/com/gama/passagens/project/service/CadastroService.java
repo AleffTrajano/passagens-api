@@ -24,25 +24,27 @@ public class CadastroService {
 	
 	@Autowired
 	private PasswordEncoder encoder;
-	private void saveUsuario(Usuario usuario) {
+	private Integer saveUsuario(Usuario usuario) {
 	
 		String senhaCriptografada = encoder.encode(usuario.getSenha());
 		usuario.setSenha(senhaCriptografada);
 		
-		if(!userRepository.existsByLogin(usuario.getLogin()))
-			userRepository.save(usuario);
-		
+		if(!userRepository.existsByLogin(usuario.getLogin())) {
+			usuario = userRepository.save(usuario);
+			return usuario.getId();
+		}
+		return null;
 	}
-	public void save(Operador operador) {
-		saveUsuario(operador);
+	public Integer save(Operador operador) {
+		return saveUsuario(operador);
 	}
 	
-	public void save(Viajante cliente) {
+	public Integer save(Viajante cliente) {
 		if(cliente.getId()==null) {
 			cliente.setRoles(new HashSet<>());
 			cliente.addRole(new Role("USER"));
 		}
-		
+		 return saveUsuario(cliente);
 		
 	}
 	

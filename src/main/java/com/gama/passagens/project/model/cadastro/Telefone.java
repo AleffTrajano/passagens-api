@@ -1,7 +1,9 @@
 package com.gama.passagens.project.model.cadastro;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
+@Embeddable
 public class Telefone {
 	@Column(length = 3)
 	private Integer ddd;

@@ -34,8 +34,8 @@ public class ViajanteController {
 	}
 	
 	@PostMapping
-	public void save(@RequestBody Viajante cliente) {
-		service.save(cliente);
+	public Integer save(@RequestBody Viajante cliente) {
+		return service.save(cliente);
 	}
 	
 	@PutMapping

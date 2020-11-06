@@ -58,3 +58,63 @@ Response:
 Para prosseguir na iteração da API é necessário realizar o cadastro do viajante:
 
 
+POST: http://{HOST}:{PORTA}/viajantes
+
+"cpfCnpj": "1234",
+  "dataNascimento": "1990-10-10",
+  "documento": {
+    "numeroDocumento": "123123",
+    "tipoDocumento": "PASSPORT"
+  },
+  "email": "viajante@gmail.com",
+  "login": "test",
+  "senha": "test",
+  "nome": "VIAJANTE TEST",
+  "sexo": "M",
+  "telefone": {
+    "ddd": 11,
+    "nomeContato": "teste",
+    "numero": 89980998
+  }
+  
+  
+
+Agora é o momento de realizar a geração da reserva (order)
+
+
+POST: http://{HOST}:{PORTA}/flights/order/{viajante} - Onde o viajante é o id do cadastro
+
+Para exemplo utilizar o arquivo createOrder.txt como body da requisição
+
+
+Response:
+"data": {
+    "type": "flight-order",
+    "id": "eJzTd9f39QlxtTAGAAs9AkM%3D",
+    "associatedRecords": [
+	...
+	]
+
+Além da resposta é armezado dados relevantes em nossa base de dados como id, preco e data da reserva.
+
+A partir agora para consultar as reservas é necessário realizar o login como ADMIN ou Viajante acessando a url de login para obter o token
+
+GET: http://{HOST}:{PORTA}/reservas
+
+Parametros:
+inicio: 2020-11-01 00:00:00
+fim: 2020-11-30 23:59:59
+viajanteId: 3
+
+[
+  {
+    "id": 1,
+    "orderId": "eJzTd9f39QlxtTAGAAs9AkM%3D",
+    "price": 100,
+    "viajanteId": 3,
+    "dataHora": "2020-11-06T20:12:41",
+    "status": "PP"
+  }
+]
+
+
