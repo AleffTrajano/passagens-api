@@ -106,15 +106,34 @@ inicio: 2020-11-01 00:00:00
 fim: 2020-11-30 23:59:59
 viajanteId: 3
 
-[
-  {
-    "id": 1,
-    "orderId": "eJzTd9f39QlxtTAGAAs9AkM%3D",
-    "price": 100,
-    "viajanteId": 3,
-    "dataHora": "2020-11-06T20:12:41",
-    "status": "PP"
-  }
-]
+{
+  "viajante": {
+    "id": 3,
+    "nome": "VIAJANTE TEST",
+    "cpfCnpj": "1234",
+    "email": "viajante1@gmail.com",
+    "telefone": {
+      "ddd": 11,
+      "numero": 89980998,
+      "nomeContato": "teste"
+    },
+    "documento": {
+      "numeroDocumento": "123123",
+      "tipoDocumento": "PASSPORT"
+    },
+    "dataNascimento": "1990-10-10",
+    "sexo": "M"
+  },
+  "reservas": [
+    {
+      "id": 1,
+      "orderId": "eJzTd9f39QlxtTAGAAs9AkM%3D",
+      "price": 100,
+      "viajanteId": 3,
+      "dataHora": "2020-11-06T20:12:41",
+      "status": "PP"
+    }
+  ]
+}
 
 

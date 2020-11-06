@@ -2,19 +2,26 @@ package com.gama.passagens.project.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gama.passagens.amadeus.order.FlightOrderService;
 import com.gama.passagens.amadeus.order.Order;
+import com.gama.passagens.project.model.cadastro.Viajante;
+import com.gama.passagens.project.model.dto.ViajanteReserva;
 import com.gama.passagens.project.model.reserva.Reserva;
 import com.gama.passagens.project.repository.ReservaRepository;
+import com.gama.passagens.project.repository.ViajanteRepository;
 
 @Component
 public class ReservaService {
 	@Autowired
 	private FlightOrderService orderService;
+	
+	@Autowired
+	private ViajanteRepository viajanteRepository;
 	
 	@Autowired
 	private ReservaRepository repository;
@@ -31,8 +38,15 @@ public class ReservaService {
 		}
 		return postOrder.getJson();
 	}
-	
-	public List<Reserva> listarReservas(Integer viajanteId, LocalDateTime inicio, LocalDateTime fim) {
+	public ViajanteReserva viajanteReservas(Integer viajanteId, LocalDateTime inicio, LocalDateTime fim) {
+		ViajanteReserva detalhe = new ViajanteReserva();
+		Optional <Viajante> viajante = viajanteRepository.findById(viajanteId);
+		detalhe.setViajante(viajante.get());
+		detalhe.setReservas(listarReservas(viajanteId, inicio, fim));
+		return detalhe;
+		
+	}
+	private List<Reserva> listarReservas(Integer viajanteId, LocalDateTime inicio, LocalDateTime fim) {
 		
 		List<Reserva> findByDataHoraBetween = repository.findByViajanteIdAndDataHoraBetween(viajanteId, inicio, fim);
 		return findByDataHoraBetween;
