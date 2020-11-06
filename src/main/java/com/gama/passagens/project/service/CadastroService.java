@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.gama.passagens.infra.exceptions.BusinessException;
 import com.gama.passagens.project.model.acesso.Role;
 import com.gama.passagens.project.model.acesso.Usuario;
 import com.gama.passagens.project.model.cadastro.Viajante;
@@ -19,7 +18,7 @@ public class CadastroService {
 	
 	@Autowired
 	private ViajanteRepository repository;
-	
+		
 	@Autowired
 	private UsuarioRepostiry userRepository;
 	
@@ -30,7 +29,7 @@ public class CadastroService {
 		String senhaCriptografada = encoder.encode(usuario.getSenha());
 		usuario.setSenha(senhaCriptografada);
 		
-		if(userRepository.findByLogin(usuario.getLogin())==null)
+		if(!userRepository.existsByLogin(usuario.getLogin()))
 			userRepository.save(usuario);
 		
 	}

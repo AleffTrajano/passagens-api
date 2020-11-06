@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.gama.passagens.project.start.Start;
+
 @SpringBootApplication
 //@EnableFeignClients
 public class PassagensApiApplication {
@@ -14,9 +16,9 @@ public class PassagensApiApplication {
 	}
 	
 	@Bean
-    public CommandLineRunner run( ) {
+    public CommandLineRunner run( Start st) {
         return args -> {
-        	//as.start();
+        	st.init();
         };
     }
 }
