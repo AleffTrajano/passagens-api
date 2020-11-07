@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import com.accenture.gama.viajei.model.pagamento.PagarmeService;
 import com.gama.passagens.amadeus.order.FlightOrderService;
 import com.gama.passagens.amadeus.order.Order;
+import com.gama.passagens.infra.exceptions.BusinessException;
+import com.gama.passagens.infra.exceptions.EmailExistenteException;
 import com.gama.passagens.project.model.cadastro.Viajante;
 import com.gama.passagens.project.model.dto.ViajanteReserva;
 import com.gama.passagens.project.model.reserva.Reserva;
@@ -34,6 +36,10 @@ public class ReservaService {
 	
 	@Autowired
 	private PagarmeService pagService;
+	
+	public void testeException() {
+		throw new EmailExistenteException("Já existe um usuário com o email " + " email@email.com" );
+	}
 	
 	public String createOrder(Integer viajanteId, String json) {
 		Order postOrder = orderService.postOrder(json);

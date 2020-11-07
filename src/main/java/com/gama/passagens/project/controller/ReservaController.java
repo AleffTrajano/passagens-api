@@ -18,6 +18,11 @@ public class ReservaController {
 	@Autowired
 	private ReservaService service;
 	
+	@GetMapping("/erro")
+	public void erro() {
+		service.testeException();
+	}
+	
 	@GetMapping()
 	public ViajanteReserva getReservas(@RequestParam("viajanteId") Integer viajanteId, @RequestParam("inicio") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime inicio, @RequestParam("fim") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime fim ) {
 		return service.viajanteReservas(viajanteId, inicio, fim);
