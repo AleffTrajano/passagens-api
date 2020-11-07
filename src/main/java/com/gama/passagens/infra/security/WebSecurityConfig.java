@@ -69,6 +69,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/viajantes").permitAll()
                 .antMatchers("/voos/**").permitAll()
                 .antMatchers("/flights/**").permitAll()
+                
+                
+                .antMatchers(HttpMethod.POST, "/passagens-api/signin").permitAll()
+                .antMatchers(HttpMethod.POST, "/passagens-api/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/passagens-api/viajantes").permitAll()
+                .antMatchers("/passagens-api/voos/**").permitAll()
+                .antMatchers("/passagens-api/flights/**").permitAll()
+                
+                
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
