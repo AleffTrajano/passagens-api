@@ -1,5 +1,6 @@
 package com.gama.passagens.infra.config.beans;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -8,6 +9,12 @@ import com.amadeus.Amadeus;
 
 @Configuration
 public class Beans {
+	@Value("${amadeus.id}")
+	private String amadeusId;
+	
+	@Value("${amadeus.secret}")
+	private String amadeusSecret;
+	
 	@Bean
     public BCryptPasswordEncoder encoder(){
         return new BCryptPasswordEncoder();
@@ -15,7 +22,7 @@ public class Beans {
 	@Bean
     public Amadeus amadeus(){
         return Amadeus
-				.builder("RZ3pbc22VwLAXtXqIU80DmT2hv1M2J8y", "zVyCOrYgU6ThENBK")
+				.builder(amadeusId, amadeusSecret)
 				.build();
     }
 }
