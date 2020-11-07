@@ -56,15 +56,18 @@ public class SwaggerConfig {
 		apiInfoBuilder.license("Licença - Open Source");
 		apiInfoBuilder.licenseUrl("http://www.gama.com.br");
 		apiInfoBuilder.contact(this.contato());
+		
+		String contato = "Gleyson Telefeone \\ Jose \\ Maria";
 		return apiInfoBuilder;
  
 	}
 	private Contact contato() {
- 
-		return new Contact(
-				"Seu Nome / Meu Nome",
+		Contact contact = new Contact(
+				"Seu Nome /\\ Meu Nome",
 				"Se email / Meu E-mail",
 				"Seu site");
+		 
+		 return contact;
 	}
 	 
 }
