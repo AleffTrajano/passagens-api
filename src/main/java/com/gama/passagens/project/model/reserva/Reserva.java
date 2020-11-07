@@ -32,6 +32,16 @@ public class Reserva {
 	@Enumerated(EnumType.STRING)
 	private ReservaStatus status = ReservaStatus.PP;
 	
+	@Column(name = "id_pagamento")
+	private Integer idPagamento;
+	
+	public Integer getIdPagamento() {
+		return idPagamento;
+	}
+	public void setIdPagamento(Integer idPagamento) {
+		this.idPagamento = idPagamento;
+	}
+	
 	public String getOrderId() {
 		return orderId;
 	}

@@ -85,19 +85,14 @@ https://stackoverflow.com/questions/50387952/how-to-resolve-unable-to-load-authe
     "numeroDocumento": "123123",
     "tipoDocumento": "PASSPORT"
   },
-  "email": "gleysondev@gmail.com",
-  "login": "gso",
-  "nome": "GLEYSON SAMPAIO",
-  "roles": [
-    {
-      "nome": "USER"
-    }
-  ],
-  "senha": "gso",
+  "email": "viajante@gmail.com",
+  "login": "test",
+  "senha": "test",
+  "nome": "VIAJANTE TEST",
   "sexo": "M",
   "telefone": {
     "ddd": 11,
-    "nomeContato": "gleyson",
+    "nomeContato": "teste"
     "numero": 89980998
   }
 }

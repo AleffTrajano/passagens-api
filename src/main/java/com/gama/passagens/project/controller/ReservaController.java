@@ -22,4 +22,9 @@ public class ReservaController {
 	public ViajanteReserva getReservas(@RequestParam("viajanteId") Integer viajanteId, @RequestParam("inicio") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime inicio, @RequestParam("fim") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime fim ) {
 		return service.viajanteReservas(viajanteId, inicio, fim);
 	}
+	
+	@GetMapping("/pagamento")
+	public void getReservas(@RequestParam("orderId") String orderId) {
+		service.confirmarPagamento(orderId);
+	}
 }

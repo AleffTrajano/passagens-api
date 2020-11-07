@@ -136,4 +136,32 @@ viajanteId: 3
   ]
 }
 
+As reservas por padrão estarão como PP (Pendentes de pagamentos), para integrar a Reserva com uma API de pagamentos (Pagarme), é necessário realizar a chamada conforme abaixo:
+
+GET: http://{HOST}:{PORTA}/reservas/pagamento
+
+Parametros:
+orderId: {orderId}
+
+Response:
+{
+  "viajante": {
+    ....
+  },
+  "reservas": [
+    {
+      "id": 1,
+      "orderId": "QlxtTAGAAs9AkM%3D",
+      "price": 100,
+      "viajanteId": 3,
+      "dataHora": "2020-11-06T21:12:41",
+      "status": "PG",
+      "idPagamento": 10287154
+    }
+  ]
+}
+
+NOTA: Se houve a confirmação do pagamento o status da reserva estará como PG (Pago) e o id do pagamento de api de pagamentos.
+
+
 

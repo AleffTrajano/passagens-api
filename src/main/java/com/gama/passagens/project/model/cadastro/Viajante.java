@@ -32,6 +32,9 @@ public class Viajante extends Usuario {
 	
 	private String sexo;
 	
+	@Embedded
+	private Endereco endereco;
+	
 	
 	public Documento getDocumento() {
 		return documento;
