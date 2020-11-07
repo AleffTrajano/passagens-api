@@ -27,21 +27,6 @@ public class Beans {
 				.builder(amadeusId, amadeusSecret)
 				.build();
     }
-	/*
-	@Bean(name="messageSource")
-	public ResourceBundleMessageSource bundleMessageSource() {
-	ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-	messageSource.setBasename("message");
-	return messageSource;
-	}
-	*/
-	@Bean
-    public MessageSource messageSource(){
-        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("/WEB-INF/message");
-        messageSource.setDefaultEncoding("UTF-8");
-        messageSource.setCacheSeconds(1);
-        return messageSource;
-    }
+	
 	
 }
